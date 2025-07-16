@@ -21,6 +21,7 @@ export default function RootLayout({
       <head>
         <meta name="google-site-verification" content="jMe4B3UjZdywbjepRqkW4fytr0BgmNnIbDJmf5Nnl4Q" />
         <meta name="google-adsense-account" content="ca-pub-7342347486013902" />
+
         <meta name="description" content="Calculadora de IMC para Adultos, Idosos e Criancas." />
         <meta name="keywords" content="imc, calculadora imc, imc adulto, imc bebe, imc idoso, imc crianca, indice massa corporal" />
         <link rel="canonical" href="https://calculadora-imc-adultos-criancas-idos.vercel.app" />
