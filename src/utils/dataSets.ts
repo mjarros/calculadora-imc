@@ -79,7 +79,6 @@ const imcByAgeChild: Array<ImcByAge> = [
       { classification: "Obesidade", min: 19.7, max: null },
     ],
   },
-  // ... continuar para todas idades até 19 anos
   {
     age: 6,
     range: [
