@@ -18,6 +18,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt-BR">
+      <head>
+        <meta name="google-site-verification" content="jMe4B3UjZdywbjepRqkW4fytr0BgmNnIbDJmf5Nnl4Q" />
+      </head>
       <body className={`${josefin.className} antialiased bg-primary-950 text-primary-100 min-h-screen flex flex-col`}>{children}</body>
     </html>
   );
