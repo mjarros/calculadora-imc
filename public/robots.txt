@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://calculadora-imc-adultos-criancas-idos.vercel.app
+
+# Sitemaps
+Sitemap: https://calculadora-imc-adultos-criancas-idos.vercel.app/sitemap.xml
