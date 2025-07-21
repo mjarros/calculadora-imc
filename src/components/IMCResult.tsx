@@ -1,31 +1,16 @@
 import { imcAdultData, imcByAgeChild, imcElderData } from "@/utils/dataSets";
-
-type IMCREsultProps = {
-  imcParams: { person: "child" | "adult" | "elder"; height: string; weight: string; sex?: "male" | "female"; age?: string };
-};
-
 type Sex = "female" | "male";
 
+type IMCREsultProps = {
+  imcParams: { height: string; weight: string; sex: Sex; age: string };
+};
+
 export default function IMCResult({ imcParams }: IMCREsultProps) {
-  const imc = Number((Number(imcParams.weight) / Math.pow(Number(imcParams.height), 2)).toFixed(2));
-  let result;
+  let result: string | undefined;
 
-  function consultIMCAdult(imc: number): string {
-    const imcRange = imcAdultData.find((range) => imc >= range.min && imc <= range.max);
+  const imc: number = Number((Number(imcParams.weight) / Math.pow(Number(imcParams.height) / 100, 2)).toFixed(2));
 
-    return `${imcRange?.classification}`;
-  }
-
-  function consultIMCElder(imc: number, sexo: Sex): string {
-    const sexRange = imcElderData[sexo];
-    const range = sexRange.find((f) => imc >= f.min && imc <= f.max);
-    if (!range) {
-      return "IMC inválido";
-    }
-    return `${range.classification}`;
-  }
-
-  function consultIMCChild(imc: number, paramsAge: string): string {
+  function consultIMCChild(imc: number | null, paramsAge: string): string | undefined {
     const group = imcByAgeChild.find((g) => g.age === Number(paramsAge));
 
     const range = group?.range.find((f) => {
@@ -37,19 +22,34 @@ export default function IMCResult({ imcParams }: IMCREsultProps) {
     return `${range?.classification}`;
   }
 
-  if (imcParams.person === "adult") {
+  function consultIMCAdult(imc: number | null): string | undefined {
+    const imcRange = imcAdultData.find((range) => imc >= range.min && imc <= range.max);
+
+    return `${imcRange?.classification}`;
+  }
+
+  function consultIMCElder(imc: number | null, sexo: Sex): string | undefined {
+    const sexRange = imcElderData[sexo];
+    const range = sexRange.find((f) => imc >= f.min && imc <= f.max);
+    if (!range) {
+      return "IMC inválido";
+    }
+    return `${range.classification}`;
+  }
+
+  if (imcParams.age <= "19") {
+    result = consultIMCChild(imc, imcParams.age);
+  }
+
+  if (imcParams.age > "19" && imcParams.age <= "65") {
     result = consultIMCAdult(imc);
   }
 
-  if (imcParams.person === "elder" && !!imcParams?.sex) {
+  if (imcParams.age > "65") {
     result = consultIMCElder(imc, imcParams.sex);
   }
 
-  if (imcParams.person === "child" && imcParams.age) {
-    result = consultIMCChild(imc, imcParams?.age);
-  }
-
-  return !!imc ? (
+  return !!imc && !!imcParams.sex && !!imcParams.age && !!imcParams.height && !!imcParams.weight ? (
     <div>
       <p className="text-center text-3xl underline mt-5">Resultado: IMC = {imc}</p>
       <p className="mt-3 text-lg text-center"> Conforme a ABESO, este valor de IMC está na classificação:</p>
