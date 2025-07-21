@@ -10,7 +10,7 @@ export default function IMCResult({ imcParams }: IMCREsultProps) {
 
   const imc: number = Number((Number(imcParams.weight) / Math.pow(Number(imcParams.height) / 100, 2)).toFixed(2));
 
-  function consultIMCChild(imc: number | null, paramsAge: string): string | undefined {
+  function consultIMCChild(imc: number, paramsAge: string): string | undefined {
     const group = imcByAgeChild.find((g) => g.age === Number(paramsAge));
 
     const range = group?.range.find((f) => {
@@ -22,13 +22,13 @@ export default function IMCResult({ imcParams }: IMCREsultProps) {
     return `${range?.classification}`;
   }
 
-  function consultIMCAdult(imc: number | null): string | undefined {
+  function consultIMCAdult(imc: number): string | undefined {
     const imcRange = imcAdultData.find((range) => imc >= range.min && imc <= range.max);
 
     return `${imcRange?.classification}`;
   }
 
-  function consultIMCElder(imc: number | null, sexo: Sex): string | undefined {
+  function consultIMCElder(imc: number, sexo: Sex): string | undefined {
     const sexRange = imcElderData[sexo];
     const range = sexRange.find((f) => imc >= f.min && imc <= f.max);
     if (!range) {
