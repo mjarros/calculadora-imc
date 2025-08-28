@@ -24,7 +24,6 @@ export default function RootLayout({
 
         <meta name="description" content="Calculadora de IMC para Adultos, Idosos e Criancas." />
         <meta name="keywords" content="imc, calculadora imc, imc adulto, imc bebe, imc idoso, imc crianca, indice massa corporal" />
-        <link rel="canonical" href="https://calculadora-imc-adultos-criancas-idos.vercel.app" />
 
         <meta property="og:title" content="Calculadora de IMC - Adultos, Idosos e Criancas." />
         <meta property="og:description" content="Calculadora de IMC para Adultos, Idosos e Criancas." />
